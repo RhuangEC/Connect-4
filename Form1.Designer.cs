@@ -84,6 +84,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox45)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox46)).BeginInit();
@@ -140,6 +141,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.LightSkyBlue;
             this.groupBox1.Controls.Add(this.pictureBox45);
             this.groupBox1.Controls.Add(this.pictureBox46);
             this.groupBox1.Controls.Add(this.pictureBox47);
@@ -198,7 +200,7 @@
             // 
             // pictureBox45
             // 
-            this.pictureBox45.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox45.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox45.Location = new System.Drawing.Point(582, 30);
             this.pictureBox45.Name = "pictureBox45";
             this.pictureBox45.Size = new System.Drawing.Size(79, 79);
@@ -268,7 +270,7 @@
             // 
             // pictureBox38
             // 
-            this.pictureBox38.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox38.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox38.Location = new System.Drawing.Point(497, 30);
             this.pictureBox38.Name = "pictureBox38";
             this.pictureBox38.Size = new System.Drawing.Size(79, 79);
@@ -332,7 +334,7 @@
             // 
             // pictureBox31
             // 
-            this.pictureBox31.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox31.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox31.Location = new System.Drawing.Point(412, 30);
             this.pictureBox31.Name = "pictureBox31";
             this.pictureBox31.Size = new System.Drawing.Size(79, 79);
@@ -396,7 +398,7 @@
             // 
             // pictureBox24
             // 
-            this.pictureBox24.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox24.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox24.Location = new System.Drawing.Point(327, 30);
             this.pictureBox24.Name = "pictureBox24";
             this.pictureBox24.Size = new System.Drawing.Size(79, 79);
@@ -460,7 +462,7 @@
             // 
             // pictureBox17
             // 
-            this.pictureBox17.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox17.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox17.Location = new System.Drawing.Point(242, 30);
             this.pictureBox17.Name = "pictureBox17";
             this.pictureBox17.Size = new System.Drawing.Size(79, 79);
@@ -530,7 +532,7 @@
             // 
             // pictureBox10
             // 
-            this.pictureBox10.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox10.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox10.Location = new System.Drawing.Point(157, 30);
             this.pictureBox10.Name = "pictureBox10";
             this.pictureBox10.Size = new System.Drawing.Size(79, 79);
@@ -660,7 +662,7 @@
             // 
             // pictureBox3
             // 
-            this.pictureBox3.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox3.Location = new System.Drawing.Point(72, 30);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(79, 79);
@@ -711,7 +713,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(903, 382);
+            this.button1.Location = new System.Drawing.Point(903, 352);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(196, 84);
             this.button1.TabIndex = 4;
@@ -721,7 +723,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(903, 502);
+            this.button2.Location = new System.Drawing.Point(903, 442);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(196, 84);
             this.button2.TabIndex = 5;
@@ -729,11 +731,23 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(903, 532);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(196, 84);
+            this.button3.TabIndex = 49;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(1244, 654);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox2);
@@ -858,6 +872,7 @@
         private System.Windows.Forms.PictureBox pictureBox30;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 

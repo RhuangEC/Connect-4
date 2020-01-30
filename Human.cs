@@ -8,5 +8,16 @@ namespace Connect_4
 {
     class Human
     {
+
+        public Human()
+        {
+
+        }
+
+        public int move()
+        {
+            return 0;
+        }
+
     }
 }

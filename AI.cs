@@ -9,5 +9,11 @@ namespace Connect_4
     class AI
     {
 
+        int move;
+        public AI()
+        {
+            
+        }
+
     }
 }
