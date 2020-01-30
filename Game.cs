@@ -39,7 +39,6 @@ namespace Connect_4
             currentplayer = p[(playercounter + 1) % 2];
             move = currentplayer.makemove();
 
-
         }
 
         public void MakeMove()
@@ -57,14 +56,13 @@ namespace Connect_4
         
         }
 
-        public int[,] updateboard()
+        public int[,] updateboard(int[,] board)
         {
-
-            board = gameBoard.getBoard();
+            this.board = board;
+            this.board = gameBoard.getBoard(this.board);
 
             return board;
         }
-
         public string LastMove()
         {
             if (currentplayer.PlayerType() == "human")

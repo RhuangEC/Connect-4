@@ -55,6 +55,11 @@ namespace Connect_4
                 }
             }
 
+            for (int x = 0; x < 7; x++)
+            {
+
+            }
+
             return win;
         
         }
@@ -83,15 +88,16 @@ namespace Connect_4
 
         }
 
-        public int[,] getBoard()
+        public int[,] getBoard(int[,] GameBoard)
         {
-            
+            board = GameBoard;
+
             for(int y =0; y < 6; y++)
             {
-                if (board[move, y] == 0)
+                if (board[move, 5 - y] == 0)
                 {
                     board[move, y] = currentplayer;
-                    y = 7;
+                    y = 6;
                 }
 
             }

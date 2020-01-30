@@ -105,7 +105,7 @@ namespace Connect_4
 
             Game newGame = new Game("normal", "AI", "human");
 
-            board = newGame.updateboard();
+            board = newGame.updateboard(board);
 
             if (newGame.LastMove() == "human")
             {
@@ -203,6 +203,7 @@ namespace Connect_4
 
         private void button2_Click(object sender, EventArgs e)
         {
+
 
         }
 
