@@ -17,12 +17,13 @@ namespace Connect_4
 
             if(type == "human")
             {
-                Human humanplayer = new Human();
+                Human humanplayer = new Human(type);
+
             }
 
             if(type == "AI")
             {
-
+                AI AIplayer = new AI(type);
             }
 
         }
@@ -30,13 +31,11 @@ namespace Connect_4
         public int getmove()
         {
             
-            
             return move;
         }
 
         public int makemove()
         {
-
 
             return move;
         }

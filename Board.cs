@@ -55,9 +55,7 @@ namespace Connect_4
                 }
             }
 
-            for (int x = 0; x < 7; x++)
-            {
-
+            for (int x = 0; x < 7; x++) { 
             }
 
             return win;

@@ -19,11 +19,8 @@ namespace Connect_4
         int playerNumber;
         int[,] board = new int[7, 6];
 
-        public Game(string gametype, string playerOne, string playerTwo)
+        public Game()
         {
-            type = gametype;
-            PlayerOne = playerOne;
-            PlayerTwo = playerTwo;
             gameBoard = new Board();
 
             p[0] = new Player(PlayerOne);
@@ -31,9 +28,23 @@ namespace Connect_4
 
             currentplayer = p[1];
 
-        }   
+        }
 
-        public void getmove()
+        public void SetGameType(string gametype, string playerOne, string playerTwo)
+        {
+            type = gametype;
+            PlayerOne = playerOne;
+            PlayerTwo = playerTwo;
+        }
+
+        public void CreatePlayers()
+        {
+            Player p1 = new Player(PlayerOne);
+            Player p2 = new Player(PlayerTwo);
+
+        }
+
+        public void getNextMove()
         {
 
             currentplayer = p[(playercounter + 1) % 2];
@@ -75,9 +86,20 @@ namespace Connect_4
             }
         }
 
+        public Boolean IsHumanMove()
+        {
+            if (currentplayer.PlayerType() == "human")
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public Boolean status()
         {
-            return gameBoard.checkWin();
+
+            return gameBoard.checkFilled();
 
         }
         public string Outcome()

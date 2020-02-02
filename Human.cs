@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Connect_4
 {
-    class Human
+    class Human 
     {
 
-        public Human()
+        public Human(string type)
         {
 
         }

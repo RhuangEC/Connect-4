@@ -20,9 +20,10 @@ namespace Connect_4
         Image Player2Image;
         Image CurrentPlayerImage;
         Image[] PlayerTurn = new Image[2];
+        Game currentGame = new Game();
         int counter;
         int[,] board = new int[7, 6];
-        Boolean clickable = true;
+        Boolean clickable = false;
         Boolean[] FullRow = new Boolean[7];
         string turn;
 
@@ -95,46 +96,14 @@ namespace Connect_4
           
             foreach (PictureBox p in Top)
             {
-                    UpdateAfterHuman();
-                    p.MouseEnter += new EventHandler(EnterButton);
-                    p.MouseLeave += new EventHandler(LeaveButton);
-                    p.MouseClick += new MouseEventHandler(MakeMove);
-
+                
+                 UpdateAfterHuman();
+                 p.MouseEnter += new EventHandler(EnterButton);
+                 p.MouseLeave += new EventHandler(LeaveButton);
+                 p.MouseClick += new MouseEventHandler(MakeMove);
+                
             }
-
-
-            Game newGame = new Game("normal", "AI", "human");
-
-            board = newGame.updateboard(board);
-
-            if (newGame.LastMove() == "human")
-            {
-
-            }
-            else
-            {
-                UpdateBoxes();
-            }
-
-            if (newGame.status() == true)
-            {
-                clickable = false;
-
-                string outcome = newGame.Outcome();
-
-                if (outcome == "WIN")
-                {
-
-                }
-                else if (outcome == "DRAW")
-                {
-
-                }
-                else
-                {
-
-                }
-            }
+            
         }
 
         public void UpdateBoxes()
@@ -199,13 +168,55 @@ namespace Connect_4
                     }
                 }
             }
+            board = currentGame.updateboard(board);
+
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
 
+            currentGame = new Game();
+            StartGame();
 
         }
+        public void StartGame()
+        {
+
+            currentGame.SetGameType("normal", "human", "human");
+            currentGame.CreatePlayers();
+            clickable = true;
+            ToggleBoxes();
+
+        }
+
+        public void ToggleBoxes()
+        {
+            if(clickable == false)
+            {
+                foreach(PictureBox p in Top)
+                {
+                    p.Visible = false;
+                }
+            }
+        }
+        public void Nextmove()
+        {
+
+            currentGame.getNextMove();
+            currentGame.MakeMove();
+            board = currentGame.updateboard(board);
+
+        }
+        public Boolean GameStatus()
+        {
+            return currentGame.status();
+        }
+
+        public string GameOutCome()
+        {
+            return currentGame.Outcome();
+        }
+
 
         public Boolean IsRowFull(int x)
         {
@@ -234,6 +245,8 @@ namespace Connect_4
                 CurrentPlayerImage = PlayerTurn[counter % 2];
                 p.Image = CurrentPlayerImage;
             }
+            Nextmove();
+
         }
         public void EnterButton(Object sender, EventArgs args)
         {
