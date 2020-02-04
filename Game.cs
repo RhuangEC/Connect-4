@@ -96,9 +96,12 @@ namespace Connect_4
             return false;
         }
 
-        public Boolean status()
+        public Boolean GameEnded()
         {
-
+            if (gameBoard.checkWin())
+            {
+                return true;
+            }
             return gameBoard.checkFilled();
 
         }
@@ -106,7 +109,7 @@ namespace Connect_4
         {
             if (gameBoard.checkWin())
             {
-                return "WIN";
+                return "Player " + currentplayer.PlayerType() + " WINS";
             }
             if (gameBoard.checkFilled())
             {

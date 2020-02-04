@@ -12,7 +12,7 @@ namespace Connect_4
         int move;
         public AI(string type)
         {
-            
+             
         }
 
     }

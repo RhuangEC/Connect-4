@@ -25,7 +25,7 @@ namespace Connect_4
         int[,] board = new int[7, 6];
         Boolean clickable = false;
         Boolean[] FullRow = new Boolean[7];
-        string turn;
+        string outcome;
 
 
         public Form1()
@@ -93,11 +93,12 @@ namespace Connect_4
 
             CurrentPlayerImage = Player1Image;
 
+            UpdateBoxes();
+
           
             foreach (PictureBox p in Top)
             {
                 
-                 UpdateAfterHuman();
                  p.MouseEnter += new EventHandler(EnterButton);
                  p.MouseLeave += new EventHandler(LeaveButton);
                  p.MouseClick += new MouseEventHandler(MakeMove);
@@ -172,10 +173,21 @@ namespace Connect_4
 
         }
 
+        public void ResetBoard()
+        {
+            foreach(PictureBox p in BoxArray)
+            {
+                p.Image = null;
+            }
+            UpdateAfterHuman();
+            CurrentPlayerImage = Player1Image;
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
 
             currentGame = new Game();
+            ResetBoard();
             StartGame();
 
         }
@@ -198,25 +210,31 @@ namespace Connect_4
                     p.Visible = false;
                 }
             }
+            else
+            {
+                foreach (PictureBox p in Top)
+                {
+                    p.Visible = true;
+                }
+            }
         }
         public void Nextmove()
         {
 
+            board = currentGame.updateboard(board);
+            EndOfTurn();
             currentGame.getNextMove();
             currentGame.MakeMove();
-            board = currentGame.updateboard(board);
 
         }
-        public Boolean GameStatus()
+        public void EndOfTurn()
         {
-            return currentGame.status();
+            ToggleBoxes();
+            if(currentGame.GameEnded() == true)
+            {
+                MessageBox.Show(currentGame.Outcome());
+            }
         }
-
-        public string GameOutCome()
-        {
-            return currentGame.Outcome();
-        }
-
 
         public Boolean IsRowFull(int x)
         {
@@ -252,14 +270,12 @@ namespace Connect_4
         {
             PictureBox p = (PictureBox)sender;
             p.Image = CurrentPlayerImage;
-
         }
 
         public void LeaveButton(object sender, EventArgs args)
         {
             PictureBox p = (PictureBox)sender;
             p.Image = null;
-
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -457,8 +473,7 @@ namespace Connect_4
 
         private void button3_Click(object sender, EventArgs e)
         {
-            clickable = true;
-            turn = "human";
+            
         }
     } 
        
