@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace Connect_4
 {
-    class Human 
+    class Human : Player
     {
-
-        public Human(string type)
+        string number;
+        public Human(string number) : base(number)
         {
-
+            this.number = number;
         }
-
         public int move()
         {
             return 0;

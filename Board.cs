@@ -36,7 +36,7 @@ namespace Connect_4
 
                     if (board[x, y] != 0 && board[x, y] == board[x, y+1] && board[x,y] == board[x, y+2]&& board[x,y] == board[x,y+3])
                     {
-                        win = true;
+                        return true;
                     }
 
                 }
@@ -49,7 +49,7 @@ namespace Connect_4
 
                     if (board[x, y] != 0 && board[x, y] == board[x+1, y] && board[x, y] == board[x+2, y] && board[x, y] == board[x+3, y])
                     {
-                        win = true;
+                        return true;
                     }
 
                 }
@@ -62,7 +62,7 @@ namespace Connect_4
                     if (board[x, y] != 0 && board[x, y] == board[x+1, y+1] && board[x, y] == board[x+2, y+2] && board[x, y] == board[x+3, y+3])
                     {
 
-                        win = true;
+                        return true;
                      
                     }
 
@@ -76,13 +76,13 @@ namespace Connect_4
                     if (board[6-x, y] != 0 && board[6-x, y] == board[(6-x) - 1, y + 1] && board[6-x, y] == board[(6-x) - 2, y + 2] && board[6-x, y] == board[(6 - x) - 3, y + 3])
                     {
 
-                        win = true;
+                        return true;
 
                     }
                 }
             }
 
-            return win;
+            return false;
         
         }
 

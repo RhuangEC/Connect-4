@@ -181,8 +181,9 @@ namespace Connect_4
             }
             UpdateAfterHuman();
             CurrentPlayerImage = Player1Image;
+            counter = 0;
         }
-
+        
         private void button2_Click(object sender, EventArgs e)
         {
 
@@ -230,6 +231,7 @@ namespace Connect_4
         public void EndOfTurn()
         {
             ToggleBoxes();
+            currentGame.EndOfTurn();
             if(currentGame.GameEnded() == true)
             {
                 MessageBox.Show(currentGame.Outcome());

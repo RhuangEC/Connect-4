@@ -39,15 +39,37 @@ namespace Connect_4
 
         public void CreatePlayers()
         {
-            Player p1 = new Player(PlayerOne);
-            Player p2 = new Player(PlayerTwo);
+            if (PlayerOne == "human")
+            {
+                p[0] = new Human("1");
+            }
+            else if(PlayerOne == "AI")
+            {
+                p[0] = new AI("1");
+            }
+
+            if (PlayerTwo == "human")
+            {
+                p[1] = new Human("2");
+            }
+            else if (PlayerTwo == "AI")
+            {
+                p[1] = new AI("2");
+            }
 
         }
 
+        public void EndOfTurn()
+        {
+            
+            currentplayer = p[playercounter % 2];
+            playercounter++;
+        }
+
+
         public void getNextMove()
         {
-
-            currentplayer = p[(playercounter + 1) % 2];
+            
             move = currentplayer.makemove();
 
         }
@@ -74,21 +96,10 @@ namespace Connect_4
 
             return board;
         }
-        public string LastMove()
-        {
-            if (currentplayer.PlayerType() == "human")
-            {
-                return "human";
-            }
-            else
-            {
-                return "AI";
-            }
-        }
 
         public Boolean IsHumanMove()
         {
-            if (currentplayer.PlayerType() == "human")
+            if (currentplayer.PlayerNumber() == "human")
             {
                 return true;
             }
@@ -109,7 +120,7 @@ namespace Connect_4
         {
             if (gameBoard.checkWin())
             {
-                return "Player " + currentplayer.PlayerType() + " WINS";
+                return "Player " + currentplayer.PlayerNumber() + " WINS";
             }
             if (gameBoard.checkFilled())
             {

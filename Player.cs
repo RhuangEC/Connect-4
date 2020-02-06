@@ -10,21 +10,11 @@ namespace Connect_4
     {
 
         int move;
-        string type;
-        public Player(string type)
+        string number;
+
+        public Player(string number)
         {
-            this.type = type;
-
-            if(type == "human")
-            {
-                Human humanplayer = new Human(type);
-
-            }
-
-            if(type == "AI")
-            {
-                AI AIplayer = new AI(type);
-            }
+            this.number = number;
 
         }
 
@@ -40,9 +30,9 @@ namespace Connect_4
             return move;
         }
 
-        public string PlayerType()
+        public string PlayerNumber()
         {
-            return this.type;
+            return this.number;
         }
 
     }

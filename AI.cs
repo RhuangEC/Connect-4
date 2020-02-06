@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace Connect_4
 {
-    class AI
+    class AI : Player
     {
-
         int move;
-        public AI(string type)
+        string number;
+
+        public AI(string number): base(number)
         {
-             
+            this.number = number;
         }
 
     }
