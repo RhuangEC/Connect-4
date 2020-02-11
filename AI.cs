@@ -9,11 +9,39 @@ namespace Connect_4
     class AI : Player
     {
         int move;
+        const int win = 9999;
+        const int lose = -9999;
         string number;
+        string type;
 
-        public AI(string number): base(number)
+        public AI(string number, string type): base(number, type)
         {
             this.number = number;
+            this.type = type;
+        }
+
+        public int GetMove()
+        {
+
+            move = RandomMove();
+
+            return move;
+        }
+
+        public int RandomMove()
+        {
+            Random rnd = new Random();
+
+            move = rnd.Next(0, 6);
+
+            
+
+            return move;
+        }
+
+        public void CalculateMove()
+        {
+
         }
 
     }

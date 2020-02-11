@@ -25,7 +25,9 @@ namespace Connect_4
         int[,] board = new int[7, 6];
         Boolean clickable = false;
         Boolean[] FullRow = new Boolean[7];
-        string outcome;
+        string firstPlayer;
+        string secondPlayer;
+        Boolean gameStarted = true;
 
 
         public Form1()
@@ -38,48 +40,48 @@ namespace Connect_4
             PlayerTurn[0] = Player1Image;
             PlayerTurn[1] = Player2Image;
 
-            BoxArray[0, 0] = pictureBox4;
-            BoxArray[0, 1] = pictureBox5;
-            BoxArray[0, 2] = pictureBox6;
-            BoxArray[0, 3] = pictureBox7;
-            BoxArray[0, 4] = pictureBox8;
-            BoxArray[0, 5] = pictureBox9;
-            BoxArray[1, 0] = pictureBox11;
-            BoxArray[1, 1] = pictureBox12;
-            BoxArray[1, 2] = pictureBox13;
-            BoxArray[1, 3] = pictureBox14;
-            BoxArray[1, 4] = pictureBox15;
-            BoxArray[1, 5] = pictureBox16;
-            BoxArray[2, 0] = pictureBox18;
-            BoxArray[2, 1] = pictureBox19;
-            BoxArray[2, 2] = pictureBox20;
-            BoxArray[2, 3] = pictureBox21;
-            BoxArray[2, 4] = pictureBox22;
-            BoxArray[2, 5] = pictureBox23;
-            BoxArray[3, 0] = pictureBox25;
-            BoxArray[3, 1] = pictureBox26;
-            BoxArray[3, 2] = pictureBox27;
-            BoxArray[3, 3] = pictureBox28;
-            BoxArray[3, 4] = pictureBox29;
-            BoxArray[3, 5] = pictureBox30;
-            BoxArray[4, 0] = pictureBox32;
-            BoxArray[4, 1] = pictureBox33;
-            BoxArray[4, 2] = pictureBox34;
-            BoxArray[4, 3] = pictureBox35;
-            BoxArray[4, 4] = pictureBox36;
-            BoxArray[4, 5] = pictureBox37;
-            BoxArray[5, 0] = pictureBox39;
-            BoxArray[5, 1] = pictureBox40;
-            BoxArray[5, 2] = pictureBox41;
-            BoxArray[5, 3] = pictureBox42;
-            BoxArray[5, 4] = pictureBox43;
-            BoxArray[5, 5] = pictureBox44;
-            BoxArray[6, 0] = pictureBox46;
-            BoxArray[6, 1] = pictureBox47;
-            BoxArray[6, 2] = pictureBox48;
-            BoxArray[6, 3] = pictureBox49;
-            BoxArray[6, 4] = pictureBox50;
-            BoxArray[6, 5] = pictureBox51;
+            BoxArray[0, 0] = pictureBox9;
+            BoxArray[0, 1] = pictureBox8;
+            BoxArray[0, 2] = pictureBox7;
+            BoxArray[0, 3] = pictureBox6;
+            BoxArray[0, 4] = pictureBox5;
+            BoxArray[0, 5] = pictureBox4;
+            BoxArray[1, 0] = pictureBox16;
+            BoxArray[1, 1] = pictureBox15;
+            BoxArray[1, 2] = pictureBox14;
+            BoxArray[1, 3] = pictureBox13;
+            BoxArray[1, 4] = pictureBox12;
+            BoxArray[1, 5] = pictureBox11;
+            BoxArray[2, 0] = pictureBox23;
+            BoxArray[2, 1] = pictureBox22;
+            BoxArray[2, 2] = pictureBox21;
+            BoxArray[2, 3] = pictureBox20;
+            BoxArray[2, 4] = pictureBox19;
+            BoxArray[2, 5] = pictureBox18;
+            BoxArray[3, 0] = pictureBox30;
+            BoxArray[3, 1] = pictureBox29;
+            BoxArray[3, 2] = pictureBox28;
+            BoxArray[3, 3] = pictureBox27;
+            BoxArray[3, 4] = pictureBox26;
+            BoxArray[3, 5] = pictureBox25;
+            BoxArray[4, 0] = pictureBox37;
+            BoxArray[4, 1] = pictureBox36;
+            BoxArray[4, 2] = pictureBox35;
+            BoxArray[4, 3] = pictureBox34;
+            BoxArray[4, 4] = pictureBox33;
+            BoxArray[4, 5] = pictureBox32;
+            BoxArray[5, 0] = pictureBox44;
+            BoxArray[5, 1] = pictureBox43;
+            BoxArray[5, 2] = pictureBox42;
+            BoxArray[5, 3] = pictureBox41;
+            BoxArray[5, 4] = pictureBox40;
+            BoxArray[5, 5] = pictureBox39;
+            BoxArray[6, 0] = pictureBox51;
+            BoxArray[6, 1] = pictureBox50;
+            BoxArray[6, 2] = pictureBox49;
+            BoxArray[6, 3] = pictureBox48;
+            BoxArray[6, 4] = pictureBox47;
+            BoxArray[6, 5] = pictureBox46;
 
             Top[0] = pictureBox3;
             Top[1] = pictureBox10;
@@ -126,11 +128,17 @@ namespace Connect_4
                     {
                         BoxArray[x, y].Image = Player2Image;
                     }
+                }
+            }
 
+            for (int x = 0; x < 7; x++)
+            {
+                for (int y = 0; y < 6; y++)
+                {
                     if (BoxArray[x, y].Image == null)
                     {
                         NextBox[x] = BoxArray[x, y];
-
+                        break;
                     }
                     else
                     {
@@ -175,11 +183,8 @@ namespace Connect_4
 
         public void ResetBoard()
         {
-            foreach(PictureBox p in BoxArray)
-            {
-                p.Image = null;
-            }
-            UpdateAfterHuman();
+            board = currentGame.resetBoard();
+            UpdateBoxes();
             CurrentPlayerImage = Player1Image;
             counter = 0;
         }
@@ -188,14 +193,27 @@ namespace Connect_4
         {
 
             currentGame = new Game();
+            gameStarted = true;
+            firstPlayer = "human";
+            secondPlayer = "human";
+            ResetBoard();
+            StartGame();
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            currentGame = new Game();
+            gameStarted = true;
+            firstPlayer = "human";
+            secondPlayer = "AI";
             ResetBoard();
             StartGame();
 
         }
         public void StartGame()
         {
-
-            currentGame.SetGameType("normal", "human", "human");
+            currentGame.SetGameType("normal", firstPlayer, secondPlayer);
             currentGame.CreatePlayers();
             clickable = true;
             ToggleBoxes();
@@ -221,29 +239,54 @@ namespace Connect_4
         }
         public void Nextmove()
         {
-
-            board = currentGame.updateboard(board);
             EndOfTurn();
-            currentGame.getNextMove();
-            currentGame.MakeMove();
+            if (gameStarted) 
+            {
+                AIMove();
+                UpdateBoxes();
+            }
+        }
+
+        public void AIMove()
+        {
+            if (currentGame.IsHumanMove() == false && gameStarted)
+            {
+                currentGame.MakeMove();
+                counter++;
+                CurrentPlayerImage = PlayerTurn[counter % 2];
+                UpdateBoxes();
+                if(gameStarted == true)
+                {
+                    Nextmove();
+                }
+
+            }
 
         }
         public void EndOfTurn()
         {
-            ToggleBoxes();
+            
             currentGame.EndOfTurn();
-            if(currentGame.GameEnded() == true)
+            clickable = currentGame.clickable();
+            ToggleBoxes();
+            if (currentGame.GameEnded() == true)
             {
                 MessageBox.Show(currentGame.Outcome());
+                gameStarted = false;
+                ResetBoard();
+                
             }
+            
         }
 
         public Boolean IsRowFull(int x)
         {
 
-            if (BoxArray[x, 0].Image != null)
+            UpdateBoxes();
+            if (BoxArray[x, 5].Image != null)
             {
                 return true;
+
             }
 
                 return false;
@@ -257,7 +300,7 @@ namespace Connect_4
 
             index = Array.IndexOf(Top, p);
 
-            if (clickable == true && IsRowFull(index) == false)
+            if (clickable && IsRowFull(index) == false)
             {
                 NextBox[index].Image = CurrentPlayerImage;
                 UpdateAfterHuman();
@@ -265,6 +308,7 @@ namespace Connect_4
                 CurrentPlayerImage = PlayerTurn[counter % 2];
                 p.Image = CurrentPlayerImage;
             }
+            
             Nextmove();
 
         }
@@ -471,11 +515,6 @@ namespace Connect_4
                 }
             }
 
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            
         }
     } 
        

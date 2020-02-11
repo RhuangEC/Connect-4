@@ -13,6 +13,7 @@ namespace Connect_4
         string PlayerOne;
         string PlayerTwo;
         Player currentplayer;
+        Player NextPlayer;
         Player[] p = new Player[2];
         int playercounter = 0;
         int move;
@@ -22,11 +23,8 @@ namespace Connect_4
         public Game()
         {
             gameBoard = new Board();
-
-            p[0] = new Player(PlayerOne);
-            p[1] = new Player(PlayerTwo);
-
-            currentplayer = p[1];
+            currentplayer = p[0];
+            NextPlayer = p[1];
 
         }
 
@@ -41,20 +39,20 @@ namespace Connect_4
         {
             if (PlayerOne == "human")
             {
-                p[0] = new Human("1");
+                p[0] = new Human("1", "human");
             }
             else if(PlayerOne == "AI")
             {
-                p[0] = new AI("1");
+                p[0] = new AI("1", "AI");
             }
 
             if (PlayerTwo == "human")
             {
-                p[1] = new Human("2");
+                p[1] = new Human("2", "human");
             }
             else if (PlayerTwo == "AI")
             {
-                p[1] = new AI("2");
+                p[1] = new AI("2", "AI");
             }
 
         }
@@ -64,42 +62,41 @@ namespace Connect_4
             
             currentplayer = p[playercounter % 2];
             playercounter++;
+            NextPlayer = p[playercounter % 2];
         }
 
-
-        public void getNextMove()
+        public int[,] MakeMove()
         {
-            
-            move = currentplayer.makemove();
+            move = NextPlayer.RandomMove();
 
-        }
-
-        public void MakeMove()
-        {
-            if (currentplayer == p[0])
+            if (NextPlayer == p[0])
             {
                 playerNumber = 1;
             }
-            if (currentplayer == p[1])
+            if (NextPlayer == p[1])
             {
                 playerNumber = 2;
             }
+            
+                gameBoard.Getmove(move, playerNumber);
+                board = gameBoard.MoveOnBoard(board);
+                
+         
 
-            gameBoard.Getmove(move, playerNumber);
-        
+            return board;
         }
 
         public int[,] updateboard(int[,] board)
         {
             this.board = board;
-            this.board = gameBoard.getBoard(this.board);
+            gameBoard.updateBoard(this.board);
 
             return board;
         }
 
         public Boolean IsHumanMove()
         {
-            if (currentplayer.PlayerNumber() == "human")
+            if (NextPlayer.PlayerType() == "human")
             {
                 return true;
             }
@@ -116,6 +113,11 @@ namespace Connect_4
             return gameBoard.checkFilled();
 
         }
+
+        public Boolean IsRowFilled()
+        {
+            return gameBoard.IsRowFilled();
+        }
         public string Outcome()
         {
             if (gameBoard.checkWin())
@@ -131,5 +133,37 @@ namespace Connect_4
                 return "error";
             }
         }
+
+        public int[,] resetBoard()
+        {
+            currentplayer = p[0];
+            NextPlayer = p[1];
+            playercounter = 0;
+
+            board = gameBoard.resetBoard();
+
+            return board;
+        }
+
+        public Boolean clickable()
+        {
+            if (NextPlayer.PlayerType() == "AI")
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public string ShowNextPlayer()
+        {
+            return NextPlayer.PlayerType();
+        }
+
+        public int showMove()
+        {
+            return move;
+        }
+
     }
 }

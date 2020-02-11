@@ -8,11 +8,10 @@ namespace Connect_4
 {
     class Board 
     {
-
-        Boolean win = false;
         int move;
         int[,] board = new int[7, 7];
         int currentplayer;
+        int[] nextMove = new int[7];
 
         public Board()
         {
@@ -103,6 +102,15 @@ namespace Connect_4
             return true;
         }
 
+        public Boolean IsRowFilled()
+        {
+            if (board[move,0] != 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public void Getmove(int move, int currentplayer)
         {
             this.move = move;
@@ -110,22 +118,41 @@ namespace Connect_4
 
         }
 
-        public int[,] getBoard(int[,] GameBoard)
+        public int[,] MoveOnBoard(int[,] GameBoard)
         {
             board = GameBoard;
 
             for(int y =0; y < 6; y++)
             {
-                if (board[move, 5 - y] == 0)
+                if (board[move, y] == 0)
                 {
                     board[move, y] = currentplayer;
-                    y = 6;
+                    break;
                 }
 
             }
 
             return board;
 
+        }
+
+        public void updateBoard(int[,] board)
+        {
+            this.board = board;
+
+        }
+
+        public int[,] resetBoard()
+        {
+            for (int x = 0; x < 7; x++)
+            {
+                for (int y = 0; y < 6; y++)
+                {
+                    board[x, y] = 0;
+                }
+            }
+
+            return board;
         }
 
     }

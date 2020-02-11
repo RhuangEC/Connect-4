@@ -9,13 +9,15 @@ namespace Connect_4
     class Human : Player
     {
         string number;
-        public Human(string number) : base(number)
+        string type;
+        public Human(string number, string type) : base(number, type)
         {
             this.number = number;
+            this.type = type;
         }
         public int move()
         {
-            return 0;
+            return -9999;
         }
 
     }

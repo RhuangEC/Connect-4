@@ -206,6 +206,7 @@
             this.pictureBox45.Size = new System.Drawing.Size(79, 79);
             this.pictureBox45.TabIndex = 48;
             this.pictureBox45.TabStop = false;
+            this.pictureBox45.Visible = false;
             this.pictureBox45.Click += new System.EventHandler(this.pictureBox45_Click);
             // 
             // pictureBox46
@@ -276,6 +277,7 @@
             this.pictureBox38.Size = new System.Drawing.Size(79, 79);
             this.pictureBox38.TabIndex = 41;
             this.pictureBox38.TabStop = false;
+            this.pictureBox38.Visible = false;
             this.pictureBox38.Click += new System.EventHandler(this.pictureBox38_Click);
             // 
             // pictureBox39
@@ -340,6 +342,7 @@
             this.pictureBox31.Size = new System.Drawing.Size(79, 79);
             this.pictureBox31.TabIndex = 34;
             this.pictureBox31.TabStop = false;
+            this.pictureBox31.Visible = false;
             this.pictureBox31.Click += new System.EventHandler(this.pictureBox31_Click);
             // 
             // pictureBox32
@@ -404,6 +407,7 @@
             this.pictureBox24.Size = new System.Drawing.Size(79, 79);
             this.pictureBox24.TabIndex = 27;
             this.pictureBox24.TabStop = false;
+            this.pictureBox24.Visible = false;
             this.pictureBox24.Click += new System.EventHandler(this.pictureBox24_Click);
             // 
             // pictureBox25
@@ -468,6 +472,7 @@
             this.pictureBox17.Size = new System.Drawing.Size(79, 79);
             this.pictureBox17.TabIndex = 20;
             this.pictureBox17.TabStop = false;
+            this.pictureBox17.Visible = false;
             this.pictureBox17.Click += new System.EventHandler(this.pictureBox17_Click);
             // 
             // pictureBox18
@@ -538,6 +543,7 @@
             this.pictureBox10.Size = new System.Drawing.Size(79, 79);
             this.pictureBox10.TabIndex = 13;
             this.pictureBox10.TabStop = false;
+            this.pictureBox10.Visible = false;
             this.pictureBox10.Click += new System.EventHandler(this.pictureBox10_Click);
             // 
             // pictureBox11
@@ -668,6 +674,7 @@
             this.pictureBox3.Size = new System.Drawing.Size(79, 79);
             this.pictureBox3.TabIndex = 0;
             this.pictureBox3.TabStop = false;
+            this.pictureBox3.Visible = false;
             this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
             // 
             // label1
@@ -737,7 +744,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(196, 84);
             this.button3.TabIndex = 49;
-            this.button3.Text = "button3";
+            this.button3.Text = "Play vs AI";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
