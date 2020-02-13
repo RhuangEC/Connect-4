@@ -9,7 +9,7 @@ namespace Connect_4
     class Board 
     {
         int move;
-        int[,] board = new int[7, 7];
+        int[,] board = new int[7, 6];
         int currentplayer;
         int[] nextMove = new int[7];
 
@@ -18,7 +18,7 @@ namespace Connect_4
 
             for (int x = 0; x<7; x++)
             {
-                for (int y = 0; y < 7; y++)
+                for (int y = 0; y < 6; y++)
                 {
                     board[x, y] = 0;
                 }
@@ -104,7 +104,7 @@ namespace Connect_4
 
         public Boolean IsRowFilled()
         {
-            if (board[move,0] != 0)
+            if (board[move, 5] != 0)
             {
                 return true;
             }
@@ -122,9 +122,9 @@ namespace Connect_4
         {
             board = GameBoard;
 
-            for(int y =0; y < 6; y++)
+            for(int y = 0; y < 6; y++)
             {
-                if (board[move, y] == 0)
+                if (board[move, y] == 0 )
                 {
                     board[move, y] = currentplayer;
                     break;

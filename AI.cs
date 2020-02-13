@@ -11,10 +11,11 @@ namespace Connect_4
         int move;
         const int win = 9999;
         const int lose = -9999;
-        string number;
+        int strength;
+        int number;
         string type;
 
-        public AI(string number, string type): base(number, type)
+        public AI(int number, string type): base(number, type)
         {
             this.number = number;
             this.type = type;

@@ -10,9 +10,9 @@ namespace Connect_4
     {
         string number;
         string type;
-        public Human(string number, string type) : base(number, type)
+        public Human(int number, string type) : base(number, type)
         {
-            this.number = number;
+            this.number = number.ToString();
             this.type = type;
         }
         public int move()

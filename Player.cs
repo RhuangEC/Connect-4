@@ -10,11 +10,16 @@ namespace Connect_4
     {
 
         int move;
-        string number;
+        int number;
         string type;
         int[,] board = new int[7, 6];
+        int[] nextSpace = new int[7];
+        Boolean[] FullRow = new Boolean[7];
+        int strength;
+        int win = 999;
+        int lose = -999;
 
-        public Player(string number, string type)
+        public Player(int number, string type)
         {
             this.number = number;
             this.type = type;
@@ -35,7 +40,7 @@ namespace Connect_4
 
         public string PlayerNumber()
         {
-            return this.number;
+            return this.number.ToString();
         }
         
         public string PlayerType()
@@ -48,16 +53,129 @@ namespace Connect_4
             Random rnd = new Random();
             move = rnd.Next(0, 6);
 
+            while(FullRow[move] == true)
+            {
+                move = rnd.Next(0, 6);
+                findNextSpaces();
+            }
+
+            return move;
+        }
+        public void getBoard(int[,] board)
+        {
+            this.board = board;
+        }
+
+        public int CalculateMove()
+        {
+            findNextSpaces();
+
+            move = tryMoves();
+
             return move;
         }
 
-        public int CalculateMove(int[,] board)
+        public int tryMoves()
+        {
+            for (int x = 0; x < 7; x++)
+            {
+                if (FullRow[x] == false)
+                {
+                    board[x, nextSpace[x]] = number;
+                }
+
+                if (checkForWin(board))
+                {
+                    move = x;
+                    board[x, nextSpace[x]] = 0;
+                    return move;
+                    
+                }
+                board[x, nextSpace[x]] = 0;
+
+            }
+
+            return RandomMove();
+        }
+
+        public void findNextSpaces()
         {
 
-            this.board = board;
+            for (int x = 0; x < 7; x++)
+            {
+                for (int y = 0; y < 6; y++)
+                {
 
+                    if(board[x,y] == 0)
+                    {
+                        nextSpace[x] = y;
+                        break;
+                    }
+                    if(board[x,5] != 0)
+                    {
+                        FullRow[x] = true;
+                    }
 
-            return move;
+                }
+            }
+
+        }
+
+        public Boolean checkForWin(int[,] board)
+        {
+            for (int x = 0; x < 7; x++)
+            {
+                for (int y = 0; y < 3; y++)
+                {
+
+                    if (board[x, y] != 0 && board[x, y] == board[x, y + 1] && board[x, y] == board[x, y + 2] && board[x, y] == board[x, y + 3])
+                    {
+                       
+                        return true;
+                    }
+
+                }
+            }
+
+            for (int x = 0; x < 4; x++)
+            {
+                for (int y = 0; y < 6; y++)
+                {
+
+                    if (board[x, y] != 0 && board[x, y] == board[x + 1, y] && board[x, y] == board[x + 2, y] && board[x, y] == board[x + 3, y])
+                    {
+                        return true;
+                    }
+
+                }
+            }
+
+            for (int x = 0; x < 4; x++)
+            {
+                for (int y = 0; y < 3; y++)
+                {
+
+                    if (board[x, y] != 0 && board[x, y] == board[x + 1, y + 1] && board[x, y] == board[x + 2, y + 2] && board[x, y] == board[x + 3, y + 3])
+                    {
+                        return true;
+                    }
+
+                }
+            }
+
+            for (int x = 0; x < 4; x++)
+            {
+                for (int y = 0; y < 3; y++)
+                {
+                    if (board[6 - x, y] != 0 && board[6 - x, y] == board[(6 - x) - 1, y + 1] && board[6 - x, y] == board[(6 - x) - 2, y + 2] && board[6 - x, y] == board[(6 - x) - 3, y + 3])
+                    {
+
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
     }

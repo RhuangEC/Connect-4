@@ -39,20 +39,20 @@ namespace Connect_4
         {
             if (PlayerOne == "human")
             {
-                p[0] = new Human("1", "human");
+                p[0] = new Human(1, "human");
             }
             else if(PlayerOne == "AI")
             {
-                p[0] = new AI("1", "AI");
+                p[0] = new AI(1, "AI");
             }
 
             if (PlayerTwo == "human")
             {
-                p[1] = new Human("2", "human");
+                p[1] = new Human(2, "human");
             }
             else if (PlayerTwo == "AI")
             {
-                p[1] = new AI("2", "AI");
+                p[1] = new AI(2, "AI");
             }
 
         }
@@ -67,7 +67,8 @@ namespace Connect_4
 
         public int[,] MakeMove()
         {
-            move = NextPlayer.RandomMove();
+            NextPlayer.getBoard(board);
+            move = NextPlayer.CalculateMove();
 
             if (NextPlayer == p[0])
             {
@@ -80,8 +81,6 @@ namespace Connect_4
             
                 gameBoard.Getmove(move, playerNumber);
                 board = gameBoard.MoveOnBoard(board);
-                
-         
 
             return board;
         }

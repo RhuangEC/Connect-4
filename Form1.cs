@@ -111,6 +111,7 @@ namespace Connect_4
 
         public void UpdateBoxes()
         {
+
             for (int x = 0; x < 7; x++)
             {
                 for (int y = 0; y < 6; y++)
@@ -140,7 +141,7 @@ namespace Connect_4
                         NextBox[x] = BoxArray[x, y];
                         break;
                     }
-                    else
+                    if(BoxArray[x,5].Image != null)
                     {
                         FullRow[x] = true;
                     }
@@ -157,8 +158,9 @@ namespace Connect_4
                     if (BoxArray[x, y].Image == null)
                     {
                         NextBox[x] = BoxArray[x, y];
+                        break;
                     }
-                    else
+                    if(BoxArray[x,5].Image != null)
                     {
                         FullRow[x] = true;
                     }
