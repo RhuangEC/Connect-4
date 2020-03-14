@@ -15,9 +15,12 @@ namespace Connect_4
         int[,] board = new int[7, 6];
         int[] nextSpace = new int[7];
         Boolean[] FullRow = new Boolean[7];
-        int strength;
         int win = 999;
         int lose = -999;
+        int[] paths = new int[7];
+        int bestMove;
+        int depth;
+
 
         public Player(int number, string type)
         {
@@ -28,7 +31,7 @@ namespace Connect_4
 
         public int getmove()
         {
-            
+
             return move;
         }
 
@@ -42,18 +45,18 @@ namespace Connect_4
         {
             return this.number.ToString();
         }
-        
+
         public string PlayerType()
         {
             return this.type;
         }
 
-        public int RandomMove() 
+        public int RandomMove()
         {
             Random rnd = new Random();
             move = rnd.Next(0, 6);
 
-            while(FullRow[move] == true)
+            while (FullRow[move] == true)
             {
                 move = rnd.Next(0, 6);
                 findNextSpaces();
@@ -75,6 +78,15 @@ namespace Connect_4
             return move;
         }
 
+        public int[,] makeMoveOnBoard(int[,] board)
+        {
+            this.board = board;
+
+            
+
+            return this.board;
+        }
+
         public int tryMoves()
         {
             for (int x = 0; x < 7; x++)
@@ -83,15 +95,21 @@ namespace Connect_4
                 {
                     board[x, nextSpace[x]] = number;
                 }
-
+                 
                 if (checkForWin(board))
                 {
                     move = x;
                     board[x, nextSpace[x]] = 0;
                     return move;
-                    
+
                 }
-                board[x, nextSpace[x]] = 0;
+                
+
+                if (FullRow[x] == false)
+                {
+                    board[x, nextSpace[x]] = 0;
+                }
+                
 
             }
 
@@ -106,12 +124,12 @@ namespace Connect_4
                 for (int y = 0; y < 6; y++)
                 {
 
-                    if(board[x,y] == 0)
+                    if (board[x, y] == 0)
                     {
                         nextSpace[x] = y;
                         break;
                     }
-                    if(board[x,5] != 0)
+                    if (board[x, 5] != 0)
                     {
                         FullRow[x] = true;
                     }
@@ -130,7 +148,7 @@ namespace Connect_4
 
                     if (board[x, y] != 0 && board[x, y] == board[x, y + 1] && board[x, y] == board[x, y + 2] && board[x, y] == board[x, y + 3])
                     {
-                       
+
                         return true;
                     }
 
@@ -178,5 +196,62 @@ namespace Connect_4
             return false;
         }
 
+        public int miniMax(int depth, int[,] board)
+        {
+
+            Boolean winFound;
+            this.depth = depth;            
+
+            for (int z = 0; z < this.depth*2; z++)
+            {
+
+                move = CalculateMove();
+                  
+                winFound = checkForWin(board);
+
+                if(winFound && z % 2 == 1)
+                {
+                    paths[z] = lose;
+                }
+
+                if(winFound == true)
+                {
+                    paths[z] = win;
+                }
+
+            }
+
+            for (int x = 0; x < 6; x++)
+            {
+                if (paths[x] > paths[x + 1])
+                {
+                    bestMove = paths[x];
+                }
+
+            }   
+            return bestMove;
+        }
+
+        public int recursionMiniMax(int[,] board)
+        {
+            bestMove = CalculateMove();
+
+            if (checkForWin(board) == true)
+            {
+                return bestMove;
+            }
+            else if(checkForWin(board) == false && depth < 8)
+            {
+                
+                recursionMiniMax(board);
+
+                return bestMove;
+            }
+            else
+            {
+                return bestMove;
+            }
+        }
     }
 }
+

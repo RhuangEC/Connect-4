@@ -58,7 +58,7 @@ namespace Connect_4
         }
 
         public void EndOfTurn()
-        {
+           {
             
             currentplayer = p[playercounter % 2];
             playercounter++;
@@ -85,12 +85,12 @@ namespace Connect_4
             return board;
         }
 
-        public int[,] updateboard(int[,] board)
+        public void updateboard(int[,] board)
         {
             this.board = board;
             gameBoard.updateBoard(this.board);
 
-            return board;
+            
         }
 
         public Boolean IsHumanMove()

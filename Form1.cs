@@ -141,13 +141,9 @@ namespace Connect_4
                         NextBox[x] = BoxArray[x, y];
                         break;
                     }
-                    if(BoxArray[x,5].Image != null)
-                    {
-                        FullRow[x] = true;
-                    }
                 }
             }
-        }
+        }  
 
         public void UpdateAfterHuman()
         {
@@ -179,7 +175,7 @@ namespace Connect_4
                     }
                 }
             }
-            board = currentGame.updateboard(board);
+            currentGame.updateboard(board);
 
         }
 
@@ -245,7 +241,7 @@ namespace Connect_4
             if (gameStarted) 
             {
                 AIMove();
-                UpdateBoxes();
+                
             }
         }
 
@@ -284,7 +280,6 @@ namespace Connect_4
         public Boolean IsRowFull(int x)
         {
 
-            UpdateBoxes();
             if (BoxArray[x, 5].Image != null)
             {
                 return true;
@@ -503,19 +498,19 @@ namespace Connect_4
         private void button1_Click(object sender, EventArgs e)
         {
 
-            int counter = 0;
+            Game currentGame = new Game();
 
-            for (int x = 0; x < 7; x++)
-            {
-                for (int y = 0; y < 6; y++)
-                {
 
-                    BoxArray[x, y].Image = PlayerTurn[counter % 2];
 
-                    counter++;
+        }
 
-                }
-            }
+        private void pictureBox30_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox25_Click(object sender, EventArgs e)
+        {
 
         }
     } 

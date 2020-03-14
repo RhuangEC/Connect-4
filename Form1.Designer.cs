@@ -418,6 +418,7 @@
             this.pictureBox25.Size = new System.Drawing.Size(79, 79);
             this.pictureBox25.TabIndex = 26;
             this.pictureBox25.TabStop = false;
+            this.pictureBox25.Click += new System.EventHandler(this.pictureBox25_Click);
             // 
             // pictureBox26
             // 
@@ -463,6 +464,7 @@
             this.pictureBox30.Size = new System.Drawing.Size(79, 79);
             this.pictureBox30.TabIndex = 21;
             this.pictureBox30.TabStop = false;
+            this.pictureBox30.Click += new System.EventHandler(this.pictureBox30_Click);
             // 
             // pictureBox17
             // 
@@ -724,7 +726,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(196, 84);
             this.button1.TabIndex = 4;
-            this.button1.Text = "Test";
+            this.button1.Text = "AI VS AI";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
