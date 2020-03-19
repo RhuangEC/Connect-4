@@ -11,6 +11,7 @@ namespace Connect_4
 
         int move;
         int number;
+        int opponentNumber;
         string type;
         int[,] board = new int[7, 6];
         int[] nextSpace = new int[7];
@@ -26,6 +27,7 @@ namespace Connect_4
         {
             this.number = number;
             this.type = type;
+            this.opponentNumber = (number + 1) % 2;
 
         }
 
@@ -73,7 +75,17 @@ namespace Connect_4
         {
             findNextSpaces();
 
-            move = tryMoves();
+            move = tryMoves(number);
+
+            if (move == -1)
+            {
+                move = tryMoves(opponentNumber);
+            }
+
+            if (move == -1)
+            {
+                move = RandomMove();
+            }
 
             return move;
         }
@@ -81,14 +93,12 @@ namespace Connect_4
         public int[,] makeMoveOnBoard(int[,] board)
         {
             this.board = board;
-
-            
-
             return this.board;
         }
 
-        public int tryMoves()
+        public int tryMoves(int number)
         {
+
             for (int x = 0; x < 7; x++)
             {
                 if (FullRow[x] == false)
@@ -103,17 +113,14 @@ namespace Connect_4
                     return move;
 
                 }
-                
-
                 if (FullRow[x] == false)
                 {
                     board[x, nextSpace[x]] = 0;
                 }
-                
-
+               
             }
 
-            return RandomMove();
+            return -1;
         }
 
         public void findNextSpaces()
@@ -196,40 +203,67 @@ namespace Connect_4
             return false;
         }
 
-        public int miniMax(int depth, int[,] board)
+        public int countThrees(int[,] board)
         {
+            int count = 0;
 
-            Boolean winFound;
-            this.depth = depth;            
 
-            for (int z = 0; z < this.depth*2; z++)
+            for (int x = 0; x < 7; x++)
             {
-
-                move = CalculateMove();
-                  
-                winFound = checkForWin(board);
-
-                if(winFound && z % 2 == 1)
+                for (int y = 0; y < 3; y++)
                 {
-                    paths[z] = lose;
-                }
 
-                if(winFound == true)
-                {
-                    paths[z] = win;
-                }
+                    if (board[x, y] != 0 && board[x, y] == board[x, y + 1] && board[x, y] == board[x, y + 2] && board[x, y + 3] == 0)
+                    {
+                        count++;
+                    }
 
+                }
             }
 
-            for (int x = 0; x < 6; x++)
+            for (int x = 0; x < 4; x++)
             {
-                if (paths[x] > paths[x + 1])
+                for (int y = 0; y < 6; y++)
                 {
-                    bestMove = paths[x];
-                }
+                    int spaces = 0;
 
-            }   
-            return bestMove;
+                    if ((board[x, y] != 0 && board[x, y] == board[x + 1, y]) || (board[x, y + 1] == 0 && spaces < 2))
+                    {
+                        if (board[x + 1, y] == 0)
+                        {
+                            spaces++;
+                        }
+
+                        if ((board[x, y] == board[x + 2, y]) || (board[x + 2, y] == 0 && spaces < 2))
+                        {
+                            if (board[x + 2, y] == 0)
+                            {
+                                spaces++;
+                            }
+
+                            if ((board[x, y] == board[x + 3, y]) || (board[x + 3, y] == 0 && spaces < 2))
+                            {
+
+                                if (board[x + 3, y] == 0)
+                                {
+                                    spaces++;
+                                }
+
+                                if ((board[x, y] == board[x + 4, y]) || (spaces == 0 && board[x + 4, y] == 0))
+                                {
+                                    count++;
+                                }
+
+                            }
+
+                        }
+
+                    }
+                }
+            }
+
+
+            return count;
         }
 
         public int recursionMiniMax(int[,] board)
@@ -242,7 +276,6 @@ namespace Connect_4
             }
             else if(checkForWin(board) == false && depth < 8)
             {
-                
                 recursionMiniMax(board);
 
                 return bestMove;
