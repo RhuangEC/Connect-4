@@ -20,6 +20,8 @@ namespace Connect_4
         int[] paths = new int[7];
         int bestMove;
         int depth;
+        int threes;
+        int mostThrees;
 
 
         public Player(int number, string type)
@@ -76,6 +78,11 @@ namespace Connect_4
 
             move = tryMoves(number);
 
+            if(depth == 7)
+            {
+                threes = countThrees(board);
+            }
+
             if (move == -1)
             {
                 move = tryMoves(opponentNumber);
@@ -107,21 +114,25 @@ namespace Connect_4
 
         public int tryMoves(int number)
         {
+            mostThrees = 0;
+            bestMove = 0;
 
             for (int x = 0; x < 7; x++)
             {
                 if (FullRow[x] == false)
                 {
                     board[x, nextSpace[x]] = number;
+
                 }
                  
                 if (checkForWin(board))
                 {
-                    move = x;
                     board[x, nextSpace[x]] = 0;
-                    return move;
-
+                    
+                    return x;
+                   
                 }
+
                 if (FullRow[x] == false)
                 {
                     board[x, nextSpace[x]] = 0;
@@ -129,7 +140,7 @@ namespace Connect_4
                
             }
 
-            return -1;
+            return bestMove;
         }
 
         public void findNextSpaces()
@@ -221,10 +232,32 @@ namespace Connect_4
             {
                 for (int y = 0; y < 3; y++)
                 {
+                    int spaces = 0;
 
-                    if (board[x, y] != 0 && board[x, y] == board[x, y + 1] && board[x, y] == board[x, y + 2] && board[x, y + 3] == 0)
+                    if (board[x, y] != 0 && board[x, y] == board[x, y + 1] || board[x, y +1] == 0)
                     {
-                        count++;
+                        if(board[x, y +1] == 0)
+                        {
+                            spaces++;
+                        }
+
+                        if(board[x, y] == board[x, y + 2] || board[x, y + 2] == 0 && spaces == 0)
+                        {
+                        
+                            if(board[x, y + 2] == 0)
+                            {
+                                spaces++;
+                            }
+
+                            if(board[x, y] == board[x, y + 3] || board[x, y + 3] == 0 && spaces == 0)
+                            {
+                             
+                                count++;
+
+                            }
+
+                        }
+
                     }
 
                 }
@@ -236,7 +269,7 @@ namespace Connect_4
                 {
                     int spaces = 0;
 
-                    if ((board[x, y] != 0 && board[x, y] == board[x + 1, y]) || (board[x, y + 1] == 0 && spaces < 2))
+                    if ((board[x, y] != 0 && board[x, y] == board[x + 1, y]) || (board[x + 1, y] == 0 && spaces == 0))
                     {
                         if (board[x + 1, y] == 0)
                         {
@@ -252,17 +285,7 @@ namespace Connect_4
 
                             if ((board[x, y] == board[x + 3, y]) || (board[x + 3, y] == 0 && spaces < 2))
                             {
-
-                                if (board[x + 3, y] == 0)
-                                {
-                                    spaces++;
-                                }
-
-                                if ((board[x, y] == board[x + 4, y]) || (spaces == 0 && board[x + 4, y] == 0))
-                                {
-                                    count++;
-                                }
-
+                                count++;
                             }
 
                         }
@@ -270,6 +293,38 @@ namespace Connect_4
                     }
                 }
             }
+
+            for (int x = 0; x < 4; x++)
+			{
+                for (int y = 0; y < 3; y++)
+			    {
+                    int spaces = 0;
+
+                    if(board[x,y] == board[x+1,y+1] && board[x, y] != 0 || board[x+1, y+1] == 0)   
+                    {
+                        if(board[x+1, y+1] == 0)
+                        {
+                            spaces++;
+                        }            
+                        
+                        if(board[x,y] == board[x + 2,y + 2] || (board[x+2,y+2] == 0 && spaces == 2))    
+                        {     
+                            if(board[x+2, y+2] == 0)
+                            {
+                                spaces++;
+                            }
+
+                            if(board[x, y] == board[x+3, y+3] || board[x + 3, y + 3] == 0 && spaces == 0)
+                            {
+                                count++;
+                            }
+
+                        }
+
+                    }
+
+			    }
+			}
 
 
             return count;
