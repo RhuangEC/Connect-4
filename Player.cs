@@ -16,8 +16,7 @@ namespace Connect_4
         int[,] board = new int[7, 6];
         int[] nextSpace = new int[7];
         Boolean[] FullRow = new Boolean[7];
-        int win = 999;
-        int lose = -999;
+        int badMove = -1;
         int[] paths = new int[7];
         int bestMove;
         int depth;
@@ -85,6 +84,16 @@ namespace Connect_4
             if (move == -1)
             {
                 move = RandomMove();
+
+                do
+                {
+                    board[move, nextSpace[move]] = number;
+                    if (tryMoves(opponentNumber) != -1)
+                    {
+                        badMove = move;
+                        move = RandomMove();
+                    }
+                } while (badMove == move);
             }
 
             return move;
